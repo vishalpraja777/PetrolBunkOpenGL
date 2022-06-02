@@ -5,7 +5,7 @@
 
 static GLfloat theta[] = {0.0,0.0,0.0};
 static GLint axis = 2;
-static GLdouble viewer[]= {0.0, 16.0, 30.0};
+static GLdouble viewer[]= {25.0, 15.0, 25.0};
 
 void display(void)
 {
@@ -17,13 +17,29 @@ void display(void)
 	
 	gluLookAt(viewer[0],viewer[1],viewer[2], 0.0, 10.0, 0.0, 0.0, 1.0, 0.0);
 	
+	//ground
+	glColor3f(0.0,1.0,0.1);
+	glPushMatrix();
+	glTranslatef(0.0,-1.0,0.0);
+	glScalef(1.0,0.005,1.0);
+ 	glutSolidCube(500.0);
+ 	glPopMatrix();
+ 	
+ 	//road
+ 	glColor3f(0.2,0.2,0.2);
+	glPushMatrix();
+	glTranslatef(0.0,1.0,25.0);
+	glScalef(100.0,0.05,0.5);
+ 	glutSolidCube(30.0);
+ 	glPopMatrix();
+ 	
 	//platform
 	//glLoadIdentity();
 	glColor3f(0.5,0.5,0.5);
 	glPushMatrix();
 	glTranslatef(0.0,0.0,0.0);
 	glScalef(1.0,0.05,1.0);
- 	glutSolidCube(30.0);
+ 	glutSolidCube(38.0);
  	glPopMatrix();
  	
  	//shed
@@ -31,29 +47,38 @@ void display(void)
 	glPushMatrix();
 	glTranslatef(0.0,17.5,0.0);
 	glScalef(1.0,0.05,1.0);
+ 	glutSolidCube(26.0);
+ 	glPopMatrix();
+ 	
+ 	//shedWhite
+ 	glColor3f(1.0,1.0,1.0);
+	glPushMatrix();
+	glTranslatef(0.0,17.4,0.0);
+	glScalef(1.0,0.05,1.0);
  	glutSolidCube(25.0);
  	glPopMatrix();
+ 	
  	
  	//pumpPlatform
  	//glLoadIdentity();
  	glColor3f(0.3,0.3,0.3);
  	glPushMatrix();
- 	glTranslatef(0.0,1.0,-5.0);
- 	glScalef(8.0,0.5,2.0);
+ 	glTranslatef(0.0,1.0,-6.0);
+ 	glScalef(8.5,0.5,2.0);
  	glutSolidCube(2.0);
  	glPopMatrix();
  	
  	//glColor3f(1.0,0.0,0.1);
  	glPushMatrix();
- 	glTranslatef(0.0,1.0,5.0);
- 	glScalef(8.0,0.5,2.0);
+ 	glTranslatef(0.0,1.0,6.0);
+ 	glScalef(8.5,0.5,2.0);
  	glutSolidCube(2.0);
  	glPopMatrix();
  	
  	//pillars
  	GLfloat lx = 5.0;
  	GLfloat ly = 8.0;
- 	GLfloat lz = 5.0;
+ 	GLfloat lz = 6.0;
  	
  	GLfloat sx = 0.05;
  	GLfloat sy = 1.0;
