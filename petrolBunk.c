@@ -124,14 +124,6 @@ void myReshape(int w, int h)
 
  glMatrixMode(GL_MODELVIEW);
 }
-
-void myinit()
-{
-	glClearColor(0.0,0.5,1.0,1.0);
-	glMatrixMode(GL_PROJECTION); 
-	gluOrtho2D(0.0,20.0,0.0,500.0);
-}
-
 void  main(int argc, char **argv)
 {
  glutInit(&argc, argv);
@@ -139,7 +131,6 @@ void  main(int argc, char **argv)
  glutInitWindowSize(700, 700);
  glutCreateWindow("Petrol Bunk");
  glutReshapeFunc(myReshape);
- //myinit();
  glutDisplayFunc(display);
 	//glutMouseFunc(mouse);
 	//glutKeyboardFunc(keys);
