@@ -5,7 +5,72 @@
 
 static GLfloat theta[] = {0.0,0.0,0.0};
 static GLint axis = 2;
-static GLdouble viewer[]= {25.0, 15.0, 25.0};
+static GLdouble viewer[]= {40.0, 15.0, 40.0};
+
+void tress(GLfloat lx, GLfloat ly, GLfloat lz)
+{	
+	//steam
+	glColor3f(0.5,0.2,0.0);
+ 	glPushMatrix();
+ 	glTranslatef(lx,ly,lz);
+ 	glScalef(0.05,1.0,0.05);
+ 	glutSolidCube(22.0);
+ 	glPopMatrix();
+ 	
+ 	//leaves
+ 	glColor3f(0.0,0.6,0.0);
+ 	glPushMatrix();
+ 	glTranslatef(lx-2.0,ly+10.0,lz-2.0);
+ 	glutSolidSphere(3.0,100.0,100.0);
+ 	glPopMatrix();
+ 	
+ 	glColor3f(0.0,0.6,0.0);
+ 	glPushMatrix();
+ 	glTranslatef(lx+2.0,ly+10.0,lz+2.0);
+ 	glutSolidSphere(3.0,100.0,100.0);
+ 	glPopMatrix();
+ 	
+ 	glColor3f(0.0,0.6,0.0);
+ 	glPushMatrix();
+ 	glTranslatef(lx,ly+14.0,lz);
+ 	glutSolidSphere(3.0,100.0,100.0);
+ 	glPopMatrix();
+}
+
+void ground()
+{
+	glColor3f(0.0,1.0,0.1);
+	glPushMatrix();
+	glTranslatef(0.0,-1.0,0.0);
+	glScalef(1.0,0.005,1.0);
+ 	glutSolidCube(500.0);
+ 	glPopMatrix();
+}
+
+void road()
+{
+	glColor3f(0.2,0.2,0.2);
+	glPushMatrix();
+	glTranslatef(0.0,1.0,25.0);
+	glScalef(100.0,0.05,0.5);
+ 	glutSolidCube(30.0);
+ 	glPopMatrix();
+}
+
+void platform()
+{
+	glColor3f(0.5,0.5,0.5);
+	glPushMatrix();
+	glTranslatef(0.0,0.0,0.0);
+	glScalef(1.0,0.05,1.0);
+ 	glutSolidCube(38.0);
+ 	glPopMatrix();
+}
+
+void shed()
+{
+	
+}
 
 void display(void)
 {
@@ -18,32 +83,17 @@ void display(void)
 	gluLookAt(viewer[0],viewer[1],viewer[2], 0.0, 10.0, 0.0, 0.0, 1.0, 0.0);
 	
 	//ground
-	glColor3f(0.0,1.0,0.1);
-	glPushMatrix();
-	glTranslatef(0.0,-1.0,0.0);
-	glScalef(1.0,0.005,1.0);
- 	glutSolidCube(500.0);
- 	glPopMatrix();
+	ground();
  	
  	//road
- 	glColor3f(0.2,0.2,0.2);
-	glPushMatrix();
-	glTranslatef(0.0,1.0,25.0);
-	glScalef(100.0,0.05,0.5);
- 	glutSolidCube(30.0);
- 	glPopMatrix();
+ 	road();
  	
 	//platform
-	//glLoadIdentity();
-	glColor3f(0.5,0.5,0.5);
-	glPushMatrix();
-	glTranslatef(0.0,0.0,0.0);
-	glScalef(1.0,0.05,1.0);
- 	glutSolidCube(38.0);
- 	glPopMatrix();
+	platform();
+	
  	
- 	//shed
- 	glColor3f(1.0,0.5,0.0);
+ 	//shedOrange
+ 	glColor3f(1.0,0.4,0.0);
 	glPushMatrix();
 	glTranslatef(0.0,17.5,0.0);
 	glScalef(1.0,0.05,1.0);
@@ -60,29 +110,31 @@ void display(void)
  	
  	
  	//pumpPlatform
+ 	
+ 	GLfloat lx = 5.0;
+ 	GLfloat ly = 8.0;
+ 	GLfloat lz = 7.0;
+ 	
+ 	GLfloat sx = 0.05;
+ 	GLfloat sy = 1.0;
+ 	GLfloat sz = 0.05;
+ 	
  	//glLoadIdentity();
  	glColor3f(0.3,0.3,0.3);
  	glPushMatrix();
- 	glTranslatef(0.0,1.0,-6.0);
+ 	glTranslatef(0.0,1.0,-lz);
  	glScalef(8.5,0.5,2.0);
  	glutSolidCube(2.0);
  	glPopMatrix();
  	
  	//glColor3f(1.0,0.0,0.1);
  	glPushMatrix();
- 	glTranslatef(0.0,1.0,6.0);
+ 	glTranslatef(0.0,1.0,lz);
  	glScalef(8.5,0.5,2.0);
  	glutSolidCube(2.0);
  	glPopMatrix();
  	
  	//pillars
- 	GLfloat lx = 5.0;
- 	GLfloat ly = 8.0;
- 	GLfloat lz = 6.0;
- 	
- 	GLfloat sx = 0.05;
- 	GLfloat sy = 1.0;
- 	GLfloat sz = 0.05;
  	
  	
 
@@ -111,20 +163,18 @@ void display(void)
  	glutSolidCube(20.0);
  	glPopMatrix();
  	
+ 	//trees
+ 	//tress(0.0,2.0,20.0);
+ 	tress(-20.0,2.0,40.0);
+ 	tress(-30.0,2.0,15.0);	
+ 	
+ 	
+ 	
  	
  	glFlush();
 	glutSwapBuffers();
 }
 
-void mouse(int btn, int state, int x, int y)
-{
-	if(btn==GLUT_LEFT_BUTTON && state == GLUT_DOWN) viewer[0] = 5;
-	if(btn==GLUT_MIDDLE_BUTTON && state == GLUT_DOWN) viewer[1] = 5;
-	if(btn==GLUT_RIGHT_BUTTON && state == GLUT_DOWN) viewer[2] = 5;
-	theta[axis] += 2.0;
-	if( theta[axis] > 360.0 ) theta[axis] -= 360.0;
-	display();
-}
 
 void myReshape(int w, int h)
 {
