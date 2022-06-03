@@ -44,7 +44,7 @@ void shed()
 	//shedBlue
  	glColor3f(0.0,0.0,0.5);
 	glPushMatrix();
-	glTranslatef(0.0,18.5,0.0);
+	glTranslatef(0.0,18.4,0.0);
 	glScalef(1.0,0.02,1.0);
  	glutSolidCube(26.1);
  	glPopMatrix();
@@ -113,19 +113,32 @@ void pillars(GLfloat lx,GLfloat ly,GLfloat lz,GLfloat sx,GLfloat sy,GLfloat sz)
 
 void pumps(GLfloat lz)
 {
-	glColor3f(0.0,0.0,0.7);
+	glColor3f(0.9,0.9,0.9);
+	
 	glPushMatrix();
-	glTranslatef(0.0,3.0,lz);
-	glScalef(1.0,3.0,0.5);
+	glTranslatef(0.0,2.0,lz);
+	glScalef(1.0,2.5,0.5);
  	glutSolidCube(3.0);
  	glPopMatrix();
  	
- 	glColor3f(0.0,0.0,0.7);
-	glPushMatrix();
-	glTranslatef(0.0,3.0,-lz);
-	glScalef(1.0,3.0,0.5);
+ 	glPushMatrix();
+	glTranslatef(1.35,6.5,lz);
+	glScalef(0.1,0.5,0.45);
  	glutSolidCube(3.0);
  	glPopMatrix();
+ 	
+ 	glPushMatrix();
+	glTranslatef(-1.35,6.5,lz);
+	glScalef(0.07,0.5,0.45);
+ 	glutSolidCube(3.0);
+ 	glPopMatrix();
+ 	
+	glPushMatrix();
+	glTranslatef(0.0,7.5,lz);
+	glScalef(1.0,0.2,0.5);
+ 	glutSolidCube(3.0);
+ 	glPopMatrix();
+ 	
 }
 
 void tress(GLfloat lx, GLfloat ly, GLfloat lz)
@@ -188,11 +201,24 @@ void display(void)
  	pillars(lx,ly,lz,sx,sy,sz);
  	
  	pumps(lz);
+ 	pumps(-lz);
  	
  	//trees
  	//tress(0.0,2.0,20.0);
- 	tress(-40.0,2.0,40.0);
+ 	
  	tress(-30.0,2.0,15.0);	
+ 	tress(-50.0,2.0,15.0);	
+ 	tress(-70.0,2.0,15.0);	
+ 	tress(-30.0,2.0,35.0);
+ 	tress(-50.0,2.0,35.0);
+ 	tress(-70.0,2.0,35.0);
+ 	tress(30.0,2.0,15.0);	
+ 	tress(50.0,2.0,15.0);	
+ 	tress(70.0,2.0,15.0);	
+ 	tress(30.0,2.0,35.0);
+ 	tress(50.0,2.0,35.0);
+ 	tress(70.0,2.0,35.0);
+ 	
  	
  	glFlush();
 	glutSwapBuffers();
