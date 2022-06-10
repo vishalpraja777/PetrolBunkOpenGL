@@ -1,12 +1,15 @@
 #include<stdlib.h>
 #include<GL/glut.h>
 #include<stdio.h>
+#include<math.h>
 //#include<stdbool.h>
 
 //static GLfloat theta[] = {0.0,0.0,0.0};
 //static GLint axis = 2;
 static GLdouble viewer[]= {30.0, 15.0, 30.0};
 GLdouble angle[]= {0.0, 10.0, 0.0};
+
+
 
 void ground()
 {
@@ -23,7 +26,7 @@ void road()
 	glColor3f(0.2,0.2,0.2);
 	glPushMatrix();
 	glTranslatef(0.0,1.0,26.0);
-	glScalef(100.0,0.05,0.4);
+	glScalef(17.0,0.01,0.4);
  	glutSolidCube(30.0);
  	glPopMatrix();
 }
@@ -171,6 +174,321 @@ void tress(GLfloat lx, GLfloat ly, GLfloat lz)
  	glPopMatrix();
 }
 
+void car()
+{
+
+	GLfloat xangle=0.0,yangle=0.0,zangle=0.0,carAngle=0.0; 
+
+float theta;
+
+GLfloat r=0,g=0,b=1;
+GLfloat xt=0.0,yt=0.0,zt=0.0,xw=0.0;   
+GLfloat xs=1.0,ys=1.0,zs=1.0;
+
+//GLint light=1;
+//int count=1,flg=1;
+//int view=0;
+int flag1=0,aflag=1;            //to switch car driving mode
+int flag2=0,wheelflag=0;   //to switch fog effect
+//GLUquadricObj *t;
+
+
+	GLfloat sx = 7.0,sy = 10.0,sz = 10.0;
+	GLfloat tx = 0.0,ty = 0.0,tz = 2.2;
+
+	glScalef(sx,sy,sz);
+	glTranslatef(tx,ty,tz);
+	 	              /* OBJECT MODULE*/
+  glBegin(GL_QUADS); 
+  /* top of cube*/
+  //************************FRONT BODY****************************************
+  glColor3f(r,g,b);
+  glVertex3f( 0.2, 0.4,0.6);
+  glVertex3f(0.6, 0.5,0.6);
+  glVertex3f(0.6, 0.5,0.2);
+  glVertex3f( 0.2,0.4,0.2);
+
+  /* bottom of cube*/
+  glVertex3f( 0.2,0.4,0.6);
+  glVertex3f(0.6,0.2,0.6);
+  glVertex3f(0.6,0.2,0.2);
+  glVertex3f( 0.2,0.2,0.2);
+
+  /* front of cube*/
+  glVertex3f( 0.2,0.2,0.6);
+  glVertex3f(0.2, 0.4,0.6);
+  glVertex3f(0.2,0.4,0.2);
+  glVertex3f( 0.2,0.2,0.2);
+
+  /* back of cube.*/
+  glVertex3f(0.6,0.2,0.6);
+  glVertex3f(0.6,0.5,0.6);
+  glVertex3f(0.6,0.5,0.2);
+  glVertex3f( 0.6,0.2,0.2);
+
+  /* left of cube*/
+  glVertex3f(0.2,0.2,0.6);
+  glVertex3f(0.6,0.2,0.6);
+  glVertex3f(0.6,0.5,0.6);
+  glVertex3f(0.2,0.4,0.6);
+
+  /* Right of cube */
+  glVertex3f(0.2,0.2,0.2);
+  glVertex3f( 0.6,0.2,0.2);
+  glVertex3f( 0.6,0.5,0.2);
+  glVertex3f( 0.2,0.4,0.2);
+//****************************************************************************
+  glVertex3f(0.7,0.65,0.6);
+  glVertex3f(0.7,0.65,0.2);
+  glVertex3f(1.7,0.65,0.2);        //top cover
+  glVertex3f(1.7,0.65,0.6);
+//***************************back guard******************************
+  glColor3f(r,g,b);            /* Set The Color To Blue*/
+  glVertex3f( 1.8, 0.5,0.6);
+  glVertex3f(1.8, 0.5,0.2);
+  glVertex3f(2.1, 0.4, 0.2);
+  glVertex3f(2.1,0.4,0.6);
+
+  /* bottom of cube*/
+  glVertex3f( 2.1,0.2,0.6);
+  glVertex3f(2.1,0.2,0.2);
+  glVertex3f(1.8,0.2,0.6);
+  glVertex3f( 1.8,0.2,0.6);
+
+  /* back of cube.*/
+  glVertex3f(2.1,0.4,0.6);
+  glVertex3f(2.1,0.4,0.2);
+  glVertex3f(2.1,0.2,0.2);
+  glVertex3f(2.1,0.2,0.6);
+
+  /* left of cube*/
+  glVertex3f(1.8,0.2,0.2);
+  glVertex3f(1.8,0.5,0.2);
+  glVertex3f(2.1,0.4,0.2);
+  glVertex3f(2.1,0.2,0.2);
+
+  /* Right of cube */
+  glVertex3f(1.8,0.2,0.6);
+  glVertex3f(1.8,0.5,0.6);
+  glVertex3f(2.1,0.4,0.6);
+  glVertex3f(2.1,0.2,0.6);
+//******************MIDDLE BODY************************************
+  glVertex3f( 0.6, 0.5,0.6);
+  glVertex3f(0.6, 0.2,0.6);
+  glVertex3f(1.8, 0.2, 0.6);
+  glVertex3f(1.8,0.5,0.6);
+
+  /* bottom of cube*/
+  glVertex3f( 0.6,0.2,0.6);
+  glVertex3f(0.6,0.2,0.2);
+  glVertex3f(1.8,0.2,0.2);
+  glVertex3f( 1.8,0.2,0.6);
+
+  /* back of cube.*/
+  glVertex3f(0.6,0.5,0.2);
+  glVertex3f(0.6,0.2,0.2);
+  glVertex3f(1.8,0.2,0.2);
+  glVertex3f(1.8,0.5,0.2);
+//*********************ENTER WINDOW**********************************
+  glColor3f(0.3,0.3,0.3);
+  glVertex3f( 0.77, 0.63,0.2);
+  glVertex3f(0.75, 0.5,0.2);        //quad front window
+  glVertex3f(1.2, 0.5, 0.2);
+  glVertex3f( 1.22,0.63,0.2);
+
+  glVertex3f(1.27,0.63,.2);
+  glVertex3f(1.25,0.5,0.2);        //quad back window
+  glVertex3f(1.65,0.5,0.2);
+  glVertex3f(1.67,0.63,0.2);
+
+  glColor3f(r,g,b);
+  glVertex3f(0.7,0.65,0.2);
+  glVertex3f(0.7,0.5,.2);       //first separation
+  glVertex3f(0.75,0.5,0.2);
+  glVertex3f(0.77,0.65,0.2);
+
+  glVertex3f(1.2,0.65,0.2);
+  glVertex3f(1.2,0.5,.2);       //second separation
+  glVertex3f(1.25,0.5,0.2);
+  glVertex3f(1.27,0.65,0.2);
+
+  glVertex3f(1.65,0.65,0.2);
+  glVertex3f(1.65,0.5,.2);     //3d separation
+  glVertex3f(1.7,0.5,0.2);
+  glVertex3f(1.7,0.65,0.2);
+
+  glVertex3f( 0.75, 0.65,0.2);
+  glVertex3f(0.75, 0.63,0.2);        //line strip
+  glVertex3f(1.7, 0.63, 0.2);
+  glVertex3f( 1.7,0.65,0.2);
+
+  glVertex3f( 0.75, 0.65,0.6);
+  glVertex3f(0.75, 0.63,0.6);        //line strip
+  glVertex3f(1.7, 0.63, 0.6);
+  glVertex3f( 1.7,0.65,0.6);
+
+  glColor3f(0.3,0.3,0.3);
+  glVertex3f( 0.77, 0.63,0.6);
+  glVertex3f(0.75, 0.5,0.6);        //quad front window
+  glVertex3f(1.2, 0.5, 0.6);
+  glVertex3f( 1.22,0.63,0.6);
+
+  glVertex3f(1.27,0.63,.6);
+  glVertex3f(1.25,0.5,0.6);        //quad back window
+  glVertex3f(1.65,0.5,0.6);
+  glVertex3f(1.67,0.63,0.6);
+
+  glColor3f(r,g,b);
+  glVertex3f(0.7,0.65,0.6);
+  glVertex3f(0.7,0.5,.6);       //first separation
+  glVertex3f(0.75,0.5,0.6);
+  glVertex3f(0.77,0.65,0.6);
+
+  glVertex3f(1.2,0.65,0.6);
+  glVertex3f(1.2,0.5,.6);       //second separation
+  glVertex3f(1.25,0.5,0.6);
+  glVertex3f(1.27,0.65,0.6);
+
+  glVertex3f(1.65,0.65,0.6);
+  glVertex3f(1.65,0.5,.6);
+  glVertex3f(1.7,0.5,0.6);
+  glVertex3f(1.7,0.65,0.6);
+  glEnd();
+
+
+ //**************************************************************
+  glBegin(GL_QUADS);
+
+  /* top of cube*/
+  glColor3f(0.3,0.3,0.3);
+  glVertex3f( 0.6, 0.5,0.6);
+  glVertex3f(0.6, 0.5,0.2);        //quad front window
+  glVertex3f(0.7, 0.65, 0.2);
+  glVertex3f( 0.7,0.65,0.6);
+
+  glVertex3f(1.7,0.65,.6);
+  glVertex3f(1.7,0.65,0.2);        //quad back window
+  glVertex3f(1.8,0.5,0.2);
+  glVertex3f(1.8,0.5,0.6);
+glEnd();
+
+//*****************************road and surrounding development***********************************
+  if(flag1)
+  {
+	glPushMatrix();
+	glTranslatef(xw,0,0);
+  glColor3f(0,1,0);
+  glVertex3f(-100,0.1,-100);
+  glVertex3f(-100,0.1,0);         //a green surroundings
+  glVertex3f(100,0.1,0);
+  glVertex3f(100,0.1,-100);
+
+  glColor3f(0.7,0.7,0.7);
+  glVertex3f(-100,0.1,0);
+  glVertex3f(-100,0.1,0.45);         //a long road
+  glVertex3f(100,0.1,0.45);
+  glVertex3f(100,0.1,0);
+
+  glColor3f(1.0,0.75,0.0);
+  glVertex3f(-100,0.1,0.45);       //a median
+  glVertex3f(-100,0.1,0.55);
+  glVertex3f(100,0.1,0.55);
+  glVertex3f(100,0.1,0.45);
+
+  glColor3f(0.7,0.7,0.7);
+  glVertex3f(-100,0.1,0.55);
+  glVertex3f(-100,0.1,1);         //a long road
+  glVertex3f(100,0.1,1);
+  glVertex3f(100,0.1,0.55);
+
+  glColor3f(0,1,0);
+  glVertex3f(-100,0.1,1);
+  glVertex3f(-100,0.1,100);         //a green surroundings
+  glVertex3f(100,0.1,100);
+  glVertex3f(100,0.1,1);
+    glPopMatrix();
+  }
+  glEnd();
+  
+  int i;
+  if(wheelflag)
+  {
+	  glPushMatrix();
+	  glTranslatef(xw,0,0);
+	  glColor3f(0.5,.2,0.3);
+	  glBegin(GL_QUADS);
+	  for(i=0;i<200;i+=0.2)
+	  {
+		  glVertex3f(-100+i,0,1);
+		  glVertex3f(-99.9+i,0,1);
+		  glVertex3f(-99.9+i,0.2,1);
+		  glVertex3f(-100+i,0.2,1);
+		  i+=0.5;
+	  }
+	  for(i=0;i<200;i+=0.2)
+	  {
+		  glVertex3f(-100+i,0,0);
+		  glVertex3f(-99.9+i,0,0);
+		  glVertex3f(-99.9+i,0.2,0);
+		  glVertex3f(-100+i,0.2,0);
+		  i+=0.5;
+	  }
+	  glEnd();
+	  glPopMatrix();
+  }
+  
+  
+  
+glColor3f(0.7,0.7,0.7);
+glPushMatrix();
+  glBegin(GL_LINE_STRIP);
+	  for(theta=0;theta<360;theta=theta+40)
+	  {
+  glVertex3f(0.6,0.2,0.62);
+  glVertex3f(0.6+(0.08*(cos(((theta+carAngle)*3.14)/180))),0.2+(0.08*(sin(((theta+carAngle)*3.14)/180))),0.62);
+	  }
+glEnd();
+
+glBegin(GL_LINE_STRIP);
+	  for(theta=0;theta<360;theta=theta+40)
+	  {
+  glVertex3f(0.6,0.2,0.18);
+  glVertex3f(0.6+(0.08*(cos(((theta+carAngle)*3.14)/180))),0.2+(0.08*(sin(((theta+carAngle)*3.14)/180))),0.18);
+	  }
+glEnd();
+
+glBegin(GL_LINE_STRIP);
+for(theta=0;theta<360;theta=theta+40)
+	  {
+  glVertex3f(1.7,0.2,0.18);
+  glVertex3f(1.7+(0.08*(cos(((theta+carAngle)*3.14)/180))),0.2+(0.08*(sin(((theta+carAngle)*3.14)/180))),0.18);
+	  }
+glEnd();
+
+glBegin(GL_LINE_STRIP);
+for(theta=0;theta<360;theta=theta+40)
+	  {
+  glVertex3f(1.7,0.2,0.62);
+ glVertex3f(1.7+(0.08*(cos(((theta+carAngle)*3.14)/180))),0.2+(0.08*(sin(((theta+carAngle)*3.14)/180))),0.62);
+	  }
+glEnd();
+
+glTranslatef(0.6,0.2,0.6);
+  glColor3f(0,0,0);
+  glutSolidTorus(0.025,0.07,10,25);
+  glTranslatef(0,0,-0.4);
+  glutSolidTorus(0.025,0.07,10,25);
+
+  glTranslatef(1.1,0,0);
+  glutSolidTorus(0.025,0.07,10,25);
+
+  glTranslatef(0,0,0.4);
+  glutSolidTorus(0.025,0.07,10,25);
+  glPopMatrix();
+
+
+}
+
 void display(void)
 {
 
@@ -218,6 +536,8 @@ void display(void)
  	tress(30.0,2.0,35.0);
  	tress(50.0,2.0,35.0);
  	tress(70.0,2.0,35.0);
+ 	
+ 	car();
  	
  	
  	glFlush();
