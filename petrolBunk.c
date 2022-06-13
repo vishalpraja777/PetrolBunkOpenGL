@@ -2,11 +2,12 @@
 #include<GL/glut.h>
 #include<stdio.h>
 #include<math.h>
+#include <unistd.h>
 //#include<stdbool.h>
 
 //static GLfloat theta[] = {0.0,0.0,0.0};
 //static GLint axis = 2;
-static GLdouble viewer[]= {30.0, 15.0, 30.0};
+static GLdouble viewer[]= {40.0, 30.0, 50.0};
 GLdouble angle[]= {0.0, 10.0, 0.0};
 
 
@@ -36,7 +37,7 @@ void platform()
 	glColor3f(0.5,0.5,0.5);
 	glPushMatrix();
 	glTranslatef(0.0,0.0,0.0);
-	glScalef(1.0,0.05,1.0);
+	glScalef(1.5,0.05,1.0);
  	glutSolidCube(40.0);
  	glPopMatrix();
 }
@@ -174,16 +175,16 @@ void tress(GLfloat lx, GLfloat ly, GLfloat lz)
  	glPopMatrix();
 }
 
-void car()
+void car(GLfloat tx,GLfloat ty,GLfloat tz,GLfloat ry)
 {
 
 	GLfloat xangle=0.0,yangle=0.0,zangle=0.0,carAngle=0.0; 
 
-float theta;
+	float theta;
 
-GLfloat r=0,g=0,b=1;
-GLfloat xt=0.0,yt=0.0,zt=0.0,xw=0.0;   
-GLfloat xs=1.0,ys=1.0,zs=1.0;
+	GLfloat r=0,g=0,b=1;
+	GLfloat xt=0.0,yt=0.0,zt=0.0,xw=0.0;   
+	GLfloat xs=1.0,ys=1.0,zs=1.0;
 
 //GLint light=1;
 //int count=1,flg=1;
@@ -193,11 +194,15 @@ int flag2=0,wheelflag=0;   //to switch fog effect
 //GLUquadricObj *t;
 
 
-	GLfloat sx = 7.0,sy = 10.0,sz = 10.0;
-	GLfloat tx = 0.0,ty = 0.0,tz = 2.2;
-
+	GLfloat sx = 10.0,sy = 10.0,sz = 10.0;
+	
+	
 	glScalef(sx,sy,sz);
 	glTranslatef(tx,ty,tz);
+	
+	
+	glRotatef(ry,0.0,1.0,0.0);
+	
 	 	              /* OBJECT MODULE*/
   glBegin(GL_QUADS); 
   /* top of cube*/
@@ -489,6 +494,54 @@ glTranslatef(0.6,0.2,0.6);
 
 }
 
+void car1()
+{
+	static int flag = 0;
+	static GLfloat tx = 10.0,ty = 0.0,tz = 2.2,ry=0.0;
+ 	car(tx,ty,tz,ry);
+ 	if(tx>2.0)
+ 	{
+ 		tx-=0.1;
+ 	}
+ 	else
+ 	{
+ 		if(tz>-0.25 && flag==0)
+ 		{
+ 			tz-=0.05;
+ 			if(ry>-90.0)
+ 				ry-=10;
+ 			
+ 			
+ 		}
+ 		else
+ 		{
+ 			flag = 1;
+ 			if(tx>-2.7)
+ 			{
+ 				if(ry<0.0)
+ 					ry+=10;
+ 				if(tx<-1.6&& tx>-1.7) 
+ 				{
+ 					sleep(2.0);
+ 				}
+ 				tx-=0.1;
+ 			}
+ 			else if(tz<2.2)
+ 			{
+ 				if(ry<90.0)
+ 					ry+=10;
+ 				tz+=0.05;
+ 			}
+ 			else if(tx>-10.0)
+ 			{
+ 				if(ry>0.0)
+ 					ry-=10;
+				tx-=0.1;
+			}
+ 		}		
+ 	}
+}
+
 void display(void)
 {
 
@@ -524,7 +577,7 @@ void display(void)
  	//trees
  	//tress(0.0,2.0,20.0);
  	
- 	tress(-30.0,2.0,15.0);	
+ 	tress(-40.0,2.0,15.0);	
  	tress(-50.0,2.0,15.0);	
  	tress(-70.0,2.0,15.0);	
  	tress(-30.0,2.0,35.0);
@@ -533,15 +586,18 @@ void display(void)
  	tress(30.0,2.0,15.0);	
  	tress(50.0,2.0,15.0);	
  	tress(70.0,2.0,15.0);	
- 	tress(30.0,2.0,35.0);
+ 	//tress(30.0,2.0,35.0);
  	tress(50.0,2.0,35.0);
  	tress(70.0,2.0,35.0);
  	
- 	car();
+ 	//GLfloat tx = 0.0,ty = 0.0,tz = 2.2;
+ 	//car(tx,ty,tz);
+ 	car1();
  	
  	
  	glFlush();
 	glutSwapBuffers();
+	glutPostRedisplay();
 }
 
 
