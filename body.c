@@ -11,9 +11,6 @@ static int knee[] = {0, 0};
 static int fingers[] = {0, 0};
 static int flang[] = {0, 0};
 
-
-
-
 int moving, startx, starty;
 
 
@@ -35,8 +32,6 @@ void display(void)
     glRotatef(angle2, 1.0, 0.0, 0.0);
     glRotatef(angle, 0.0, 1.0, 0.0);
 
-
-
     // START OF RIGHT LEG
     glPushMatrix();
 
@@ -52,7 +47,6 @@ void display(void)
     glScalef (0.5, 1.0, 0.5);
     glutSolidCube (1.0);
     glPopMatrix();
-
 
     glTranslatef(0.0, -0.5, 0.0);
     //glRotatef(GLfloat (knee[0]), 1.0, 0.0, 0.0);
@@ -142,16 +136,13 @@ void display(void)
 
     glPushMatrix();
 
-
-
     glTranslatef(1.25, 1.85, 0.3);
 
-
-    glRotatef((GLfloat)armZ[0], 1.0, 0.0, 0.0);
+    glRotatef((GLfloat)armZ[0], 0.0, 0.0, 0.0);
 
 
     glTranslatef(-0.375, 0, 0);
-    glRotatef(arm[0], 0.0, 0.0, 1.0);
+    glRotatef(arm[0], 0.0, 0.0, 0.0);
     glTranslatef(0.375, 0, 0);
 
     // Draw the limb
@@ -162,21 +153,16 @@ void display(void)
     glutSolidCube (1.0);
     glPopMatrix();
 
-
-
-
     glTranslatef(0.75, 0, 0);
 
     glTranslatef(-0.375, 0, 0.0);
-    glRotatef((GLfloat)elbow[0], 0.0, 0.0, 1.0);
+    glRotatef((GLfloat)elbow[90], 0.0, 1.0, 1.0);
     glTranslatef(0.375, 0, 0.0);
     glPushMatrix();
     glColor3f(0.71, 0.4, 0.12);
     glScalef (0.75, 0.3, 0.3);
     glutSolidCube (1.0);
     glPopMatrix();
-
-
 
     // START OF FINGER 1
     glPushMatrix();
@@ -191,8 +177,6 @@ void display(void)
     glScalef(0.2, 0.1, 0.05);
     glutSolidCube(1.0);
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(0.1, 0, 0);
@@ -223,8 +207,6 @@ void display(void)
     glutSolidCube(1.0);
     glPopMatrix();
 
-
-
     glPushMatrix();
     glTranslatef(0.1, 0, 0);
     glTranslatef(-0.05, 0, 0);
@@ -252,8 +234,6 @@ void display(void)
     glScalef(0.2, 0.1, 0.05);
     glutSolidCube(1.0);
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(0.1, 0, 0);
@@ -283,7 +263,6 @@ void display(void)
     glScalef(0.2, 0.1, 0.05);
     glutSolidCube(1.0);
     glPopMatrix();
-
 
 
     glPushMatrix();
@@ -316,7 +295,6 @@ void display(void)
     glPopMatrix();
 
 
-
     glPushMatrix();
     glTranslatef(0.1, 0, 0);
     glTranslatef(-0.05, 0, 0);
@@ -342,12 +320,10 @@ void display(void)
 
     glPushMatrix();
 
-
-
     glTranslatef(-1.25, 1.85, 0.3);
     glRotatef((GLfloat)armZ[1], 1.0, 0.0, 0.0);
     glTranslatef(0.375, 0, 0);
-    glRotatef(arm[1], 0.0, 0.0, 1.0);
+    glRotatef(arm[1], 0.0, 0.0, 0.0);
     glTranslatef(-0.375, 0, 0);
 
     // Draw the limb
@@ -358,12 +334,10 @@ void display(void)
     glutSolidCube (1.0);
     glPopMatrix();
 
-
-
     glTranslatef(-0.75, 0, 0);
 
     glTranslatef(0.375, 0, 0.0);
-    glRotatef((GLfloat)elbow[1], 0.0, 0.0, 1.0);
+    glRotatef((GLfloat)elbow[1], 0.0, 0.0, 0.0);
     glTranslatef(-0.375, 0, 0.0);
     glPushMatrix();
     glColor4f(0.71, 0.4, 0.12, 0.5);
@@ -384,8 +358,6 @@ void display(void)
     glScalef(0.2, 0.1, 0.05);
     glutSolidCube(1.0);
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(-0.1, 0, 0);
@@ -417,7 +389,6 @@ void display(void)
     glPopMatrix();
 
 
-
     glPushMatrix();
     glColor4f(0.71, 0.4, 0.12, 0.5);
     glTranslatef(-0.1, 0, 0);
@@ -445,8 +416,6 @@ void display(void)
     glScalef(0.2, 0.1, 0.05);
     glutSolidCube(1.0);
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(-0.1, 0, 0);
@@ -477,8 +446,6 @@ void display(void)
     glutSolidCube(1.0);
     glPopMatrix();
 
-
-
     glPushMatrix();
     glTranslatef(-0.1, 0, 0);
     glTranslatef(0.05, 0, 0);
@@ -492,7 +459,6 @@ void display(void)
     glPopMatrix();
 
     // END OF FINGER 4
-
 
     // START OF FINGER 5
     glPushMatrix();
@@ -508,8 +474,6 @@ void display(void)
     glutSolidCube(1.0);
     glPopMatrix();
 
-
-
     glPushMatrix();
     glTranslatef(-0.1, 0, 0);
     glTranslatef(0.05, 0, 0);
@@ -524,52 +488,12 @@ void display(void)
 
     // END OF FINGER 5
 
-
-
-
     glPopMatrix();
-
-
-
 
     // END OF LEFT ARM
 
-
-
-
-
     glPopMatrix();
     glutSwapBuffers();
-
-
-
-
-
-
-//    glTranslatef(1.5, 0.25, 0.0);
-//    glPushMatrix();
-//    glColor3f(1.0, 0.0, 0.0);
-//    glScalef (1, 0.5, 1);
-//    glutWireCube (1.0);
-//    glPopMatrix();sudo apt install g++
-
-//    glTranslatef(0.0, 1.25, 0.0);
-//    glPushMatrix();
-//    glColor3f(0.0, 1.0, 0.0);
-//    glScalef (0.5, 2.0, 0.5);sudo apt install g++
-
-
-//    glutWireCube (1.0);
-//    glPopMatrix();
-//    glTranslatef(0.0, 2, 0.0);
-//    glPushMatrix();
-//    glColor3f(0.0, 0.0, 1.0);
-//    glScalef (0.5, 2.0, 0.5);
-//    glutWireCube (1.0);
-//    glPopMatrix();sudo apt install g++
-
-
-
 
 }
 
@@ -584,287 +508,6 @@ void reshape(int w, int h)
     glTranslatef(0.0, 0.0, -5.0);
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key) {
-        // LEGS MOVEMENT
-        case 'x':
-            if (legX[1] >= -70) {
-                legX[1] = (legX[1] - 5) % 360;
-                glutPostRedisplay();
-
-
-            }
-            break;
-
-        case 'X':
-            if (legX[1] <= 70) {
-                legX[1] = (legX[1] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'z':
-            if (legZ[1] >= -70) {
-                legZ[1] = (legZ[1] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'Z':
-            if (legZ[1] <= 70) {
-                legZ[1] = (legZ[1] + 5) % 360;
-                glutPostRedisplay();
-            }
-
-            break;
-
-
-        case 'n':
-            if (legX[0] >= -50) {
-                legX[0] = (legX[0] - 5) % 360;
-                glutPostRedisplay();
-
-
-            }
-            break;
-
-        case 'N':
-            if (legX[0] <= 50) {
-                legX[0] = (legX[0] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'm':
-            if (legZ[0] >= -30) {
-                legZ[0] = (legZ[0] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'M':
-            if (legZ[0] <= 30) {
-                legZ[0] = (legZ[0] + 5) % 360;
-                glutPostRedisplay();
-            }
-
-            break;
-
-            // KNEES MOVEMENT
-        case 'k':
-            if (knee[0] >= -30) {
-                knee[0] = (knee[0] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'K':
-            if (knee[0] <= 30) {
-                knee[0] = (knee[0] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 's':
-            if (knee[1] >= -30) {
-                knee[1] = (knee[1] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'S':
-            if (knee[1] <= 30) {
-                knee[1] = (knee[1] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-            // ARMS MOVEMENT
-        case 'c':
-            if (arm[1] < 90) {
-                arm[1] = (arm[1] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'C':
-            if (arm[1] > -90) {
-                arm[1] = (arm[1] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'j':
-            if (arm[0] < 90) {
-                arm[0] = (arm[0] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'J':
-            if (arm[0] > -90) {
-                arm[0] = (arm[0] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-
-            // ELBOWS MOVEMENT
-        case 'v':
-            if (elbow[1] < 130) {
-                elbow[1] = (elbow[1] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'V':
-            if (elbow[1] > -120) {
-                elbow[1] = (elbow[1] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'b':
-            if (elbow[0] < 130) {
-                elbow[0] = (elbow[0] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'B':
-            if (elbow[0] > -120) {
-                elbow[0] = (elbow[0] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'U':
-            if (armZ[0] < 90) {
-                armZ[0] = (armZ[0] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'u':
-            if (armZ[0] > -90) {
-                armZ[0] = (armZ[0] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'D':
-            if (armZ[1] < 90) {
-                armZ[1] = (armZ[1] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'd':
-            if (armZ[1] > -90) {
-                armZ[1] = (armZ[1] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-
-        case 'q':
-            if (flang[1] < 20) {
-                flang[1] = (flang[1] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'Q':
-            if (flang[1] > -20) {
-                flang[1] = (flang[1] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'w':
-            if (fingers[1] < 20) {
-                fingers[1] = (fingers[1] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'W':
-            if (fingers[1] > -20) {
-                fingers[1] = (fingers[1] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'i':
-            if (flang[0] < 20) {
-                flang[0] = (flang[0] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'I':
-            if (flang[0] > -20) {
-                flang[0] = (flang[0] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'o':
-            if (fingers[0] < 20) {
-                fingers[0] = (fingers[0] + 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-        case 'O':
-            if (fingers[0] > -20) {
-                fingers[0] = (fingers[0] - 5) % 360;
-                glutPostRedisplay();
-            }
-            break;
-
-
-
-
-
-
-        case 27:
-            exit(0);
-            break;
-        default:
-            break;
-    }
-}
-
-static void mouse(int button, int state, int x, int y)
-{
-    if (button == GLUT_LEFT_BUTTON) {
-        if (state == GLUT_DOWN) {
-            moving = 1;
-            startx = x;
-            starty = y;
-        }
-        if (state == GLUT_UP) {
-            moving = 0;
-        }
-    }
-}
-
-
-static void motion(int x, int y)
-{
-    if (moving) {
-        angle = angle + (x - startx);
-        angle2 = angle2 + (y - starty);
-        startx = x;
-        starty = y;
-        glutPostRedisplay();
-    }
-}
-
-
-
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
@@ -873,11 +516,8 @@ int main(int argc, char **argv)
     glutInitWindowPosition(100, 100);
     glutCreateWindow(argv[0]);
     init();
-    glutMouseFunc(mouse);
-    glutMotionFunc(motion);
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
-    glutKeyboardFunc(keyboard);
     glutMainLoop();
     return 0;
 }
