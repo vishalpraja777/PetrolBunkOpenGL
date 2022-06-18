@@ -7,7 +7,7 @@
 
 //static GLfloat theta[] = {0.0,0.0,0.0};
 //static GLint axis = 2;
-static GLdouble viewer[]= {40.0, 30.0, 50.0};
+static GLdouble viewer[]= {-12.0, 15.0, 50.0};
 GLdouble angle[]= {0.0, 10.0, 0.0};
 
 
@@ -17,7 +17,7 @@ void ground()
 	glColor3f(0.0,1.0,0.1);
 	glPushMatrix();
 	glTranslatef(0.0,-1.0,0.0);
-	glScalef(1.0,0.005,1.0);
+	glScalef(2.0,0.005,2.0);
  	glutSolidCube(500.0);
  	glPopMatrix();
 }
@@ -27,7 +27,7 @@ void road()
 	glColor3f(0.2,0.2,0.2);
 	glPushMatrix();
 	glTranslatef(0.0,1.0,26.0);
-	glScalef(17.0,0.01,0.4);
+	glScalef(20.0,0.01,0.4);
  	glutSolidCube(30.0);
  	glPopMatrix();
 }
@@ -202,6 +202,8 @@ int flag2=0,wheelflag=0;   //to switch fog effect
 	
 	
 	glRotatef(ry,0.0,1.0,0.0);
+	
+	glPushMatrix();
 	
 	 	              /* OBJECT MODULE*/
   glBegin(GL_QUADS); 
@@ -490,6 +492,7 @@ glTranslatef(0.6,0.2,0.6);
   glTranslatef(0,0,0.4);
   glutSolidTorus(0.025,0.07,10,25);
   glPopMatrix();
+  glPopMatrix();
 
 
 }
@@ -497,7 +500,10 @@ glTranslatef(0.6,0.2,0.6);
 void car1()
 {
 	static int flag = 0;
-	static GLfloat tx = 10.0,ty = 0.0,tz = 2.2,ry=0.0;
+	static GLfloat tx = 20.0,ty = 0.0,tz = 2.2,ry=0.0;
+	
+	GLfloat ra = 4.0;
+	
  	car(tx,ty,tz,ry);
  	if(tx>2.0)
  	{
@@ -509,7 +515,7 @@ void car1()
  		{
  			tz-=0.05;
  			if(ry>-90.0)
- 				ry-=10;
+ 				ry-=ra;
  			
  			
  		}
@@ -519,7 +525,7 @@ void car1()
  			if(tx>-2.7)
  			{
  				if(ry<0.0)
- 					ry+=10;
+ 					ry+=ra;
  				if(tx<-1.6&& tx>-1.7) 
  				{
  					sleep(2.0);
@@ -529,16 +535,32 @@ void car1()
  			else if(tz<2.2)
  			{
  				if(ry<90.0)
- 					ry+=10;
+ 					ry+=ra;
  				tz+=0.05;
  			}
- 			else if(tx>-10.0)
+ 			else if(tx>-20.0)
  			{
  				if(ry>0.0)
- 					ry-=10;
+ 					ry-=ra;
 				tx-=0.1;
 			}
  		}		
+ 	}
+}
+
+
+void car2()
+{
+	
+	static int flag = 0;
+	static GLfloat tx = 10.0,ty = 0.0,tz = 2.2,ry=0.0;
+	
+	GLfloat ra = 4.0;
+	
+ 	car(tx,ty,tz,ry);
+ 	if(tx>-20.0)
+ 	{
+ 		tx-=0.1;
  	}
 }
 
@@ -592,7 +614,15 @@ void display(void)
  	
  	//GLfloat tx = 0.0,ty = 0.0,tz = 2.2;
  	//car(tx,ty,tz);
+ 	
+ 	glPushMatrix();
  	car1();
+ 	glPopMatrix();
+ 	
+ 	glPushMatrix();
+ 	car2();
+ 	glPopMatrix();
+ 	
  	
  	
  	glFlush();
@@ -646,6 +676,7 @@ void keys(unsigned char key, int x, int y)
    if(key == 'Y') viewer[1]+= 1.0;
    if(key == 'z') viewer[2]-= 1.0;
    if(key == 'Z') viewer[2]+= 1.0;
+   printf("\n%f %f %f\n",viewer[0],viewer[1],viewer[2]);
    display();
 }
 
