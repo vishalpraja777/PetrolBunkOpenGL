@@ -175,14 +175,14 @@ void tress(GLfloat lx, GLfloat ly, GLfloat lz)
  	glPopMatrix();
 }
 
-void car(GLfloat tx,GLfloat ty,GLfloat tz,GLfloat ry)
+void car(GLfloat tx,GLfloat ty,GLfloat tz,GLfloat ry,GLfloat pr, GLfloat pg, GLfloat pb)
 {
 
 	GLfloat xangle=0.0,yangle=0.0,zangle=0.0,carAngle=0.0; 
 
 	float theta;
 
-	GLfloat r=0,g=0,b=1;
+	GLfloat r=pr,g=pg,b=pb;
 	GLfloat xt=0.0,yt=0.0,zt=0.0,xw=0.0;   
 	GLfloat xs=1.0,ys=1.0,zs=1.0;
 
@@ -244,7 +244,7 @@ int flag2=0,wheelflag=0;   //to switch fog effect
   glVertex3f( 0.6,0.2,0.2);
   glVertex3f( 0.6,0.5,0.2);
   glVertex3f( 0.2,0.4,0.2);
-//****************************************************************************
+
   glVertex3f(0.7,0.65,0.6);
   glVertex3f(0.7,0.65,0.2);
   glVertex3f(1.7,0.65,0.2);        //top cover
@@ -504,7 +504,7 @@ void car1()
 	
 	GLfloat ra = 4.0;
 	
- 	car(tx,ty,tz,ry);
+ 	car(tx,ty,tz,ry,0.0,0.0,1.0);
  	if(tx>2.0)
  	{
  		tx-=0.1;
@@ -557,11 +557,492 @@ void car2()
 	
 	GLfloat ra = 4.0;
 	
- 	car(tx,ty,tz,ry);
+ 	car(tx,ty,tz,ry,1.0,0.0,0.0);
  	if(tx>-20.0)
  	{
  		tx-=0.1;
  	}
+}
+
+void body(GLfloat tx,GLfloat ty,GLfloat tz)
+{
+
+	static int elbow[] = {0, 0};
+static int arm[] = {0, 0};
+static int armZ[] = {0, 0};
+static int legX[] = {0, 0};
+static int legZ[] = {0, 0};
+static int knee[] = {0, 0};
+static int fingers[] = {0, 0};
+static int flang[] = {0, 0};
+
+glTranslatef(tx, ty, tz);
+
+	glPushMatrix();
+
+    glTranslatef(0.5, 0.0, 0.0);
+    glRotatef((GLfloat)legZ[0], 0.0, 0.0, 1.0);
+    glTranslatef(-0.5, 0.0, 0.0);
+
+    glRotatef((GLfloat)legX[0], 1.0, 0.0, 0.0);
+    glTranslatef(0.5, -0.5, 0.0);
+
+    glPushMatrix();
+    glColor3f(1.0, 1.0, 1.0);
+    glScalef (0.5, 1.0, 0.5);
+    glutSolidCube (1.0);
+    glPopMatrix();
+
+    glTranslatef(0.0, -0.5, 0.0);
+    //glRotatef(GLfloat (knee[0]), 1.0, 0.0, 0.0);
+    glTranslatef(0.0, -0.5, 0.0);
+    glPushMatrix();
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glScalef (0.5, 1.0, 0.5);
+    glutSolidCube (1.0);
+    glPopMatrix();
+
+    glTranslatef(0.0, -0.625, 0.0);
+    glPushMatrix();
+    glColor3f(0.0, 0.0, 1.0);
+    glScalef (0.75, 0.25, 0.75);
+    glutSolidCube (1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+    // END OF RIGHT LEG
+
+
+    // START OF LEFT LEG
+    glPushMatrix();
+
+    glTranslatef(-0.5, 0.0, 0.0);
+    glRotatef((GLfloat)legZ[1], 0.0, 0.0, 1.0);
+    glTranslatef(+0.5, 0.0, 0.0);
+
+    glRotatef((GLfloat)legX[1], 1.0, 0.0, 0.0);
+    glTranslatef(-0.5, -0.5, 0.0);
+
+    glPushMatrix();
+    glColor3f(1.0, 1.0, 1.0);
+    glScalef (0.5, 1.0, 0.5);
+    glutSolidCube (1.0);
+    glPopMatrix();
+
+
+    glTranslatef(0.0, -0.5, 0.0);
+    //glRotatef(GLfloat (knee[1]), 1.0, 0.0, 0.0);
+    glTranslatef(0.0, -0.5, 0.0);
+    glPushMatrix();
+    glColor3f(0.71, 0.4, 0.12);
+    glScalef (0.5, 1.0, 0.5);
+    glutSolidCube (1.0);
+    glPopMatrix();
+
+    glTranslatef(0.0, -0.625, 0.0);
+    glPushMatrix();
+    glColor3f(0.0, 0.0, 1.0);
+    glScalef (0.75, 0.25, 0.75);
+    glutSolidCube (1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+    // END OF LEFT LEG
+
+
+    // START OF TRUNK
+    glPushMatrix();
+    glTranslatef(0.0, 0.25, 0.0);
+    glScalef(1.5, 0.5, 0.5);
+    glColor3f(1.0, 1.0, 1.0);
+    glutSolidCube(1.0);
+    glPopMatrix();
+    // END OF TRUNK
+
+    // START OF STOMACH
+    glPushMatrix();
+    glTranslatef(0.0, 1.25, 0.0);
+    glScalef(1.5, 1.5, 0.5);
+    glColor3f(1.0, 0.0, 0.0);
+    glutSolidCube(1.0);
+    glPopMatrix();
+    // END OF STOMACH
+
+    // START OF HEAD
+    glPushMatrix();
+    glTranslatef(0.0, 2.5, 0.0);
+    glColor3f(0.71, 0.4, 0.12);
+    glutSolidSphere(0.35, 16, 16);
+    glPopMatrix();
+    // END OF HEAD
+
+
+    // START OF RIGHT ARM
+
+    glPushMatrix();
+
+    glTranslatef(0.9, 1.5, 0.0);
+
+    //glRotatef((GLfloat)armZ[0], 0.0, 0.0, 0.0);
+    glRotatef(-90, 0.0, 0.0, 1.0);
+
+
+    glTranslatef(-0.375, 0, 0);
+    glRotatef(arm[0], 0.0, 0.0, 0.0);
+    glTranslatef(0.375, 0, 0);
+
+    // Draw the limb
+    // The shoulder is centered in origin and has 1, 1, 1 dimensions
+    glPushMatrix();
+    glColor3f(0.0, 0.0, 1.0);
+    glScalef (0.75, 0.3, 0.3);
+    glutSolidCube (1.0);
+    glPopMatrix();
+
+    glTranslatef(0.75, 0, 0);
+
+    glTranslatef(-0.375, 0, 0.0);
+    glRotatef((GLfloat)elbow[90], 0.0, 1.0, 1.0);
+    glTranslatef(0.375, 0, 0.0);
+    glPushMatrix();
+    glColor3f(0.71, 0.4, 0.12);
+    glScalef (0.75, 0.3, 0.3);
+    glutSolidCube (1.0);
+    glPopMatrix();
+
+    // START OF FINGER 1
+    glPushMatrix();
+
+    glTranslatef(0.475, 0.05, 0.1125);
+    glColor3f(1, 0, 0);
+
+    glTranslatef(-0.1 , 0, 0);
+    glRotatef(flang[0], 0, 0, 1);
+    glTranslatef(0.1, 0, 0);
+    glPushMatrix();
+    glScalef(0.2, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.1, 0, 0);
+    glTranslatef(-0.05, 0, 0);
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glRotatef(fingers[0], 0, 0, 1);
+    glTranslatef(0.05, 0, 0);
+    glScalef(0.1, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+
+    // END OF FINGER 1
+
+
+    // START OF FINGER 2
+    glPushMatrix();
+
+    glTranslatef(0.475, 0.05, 0.0375);
+    glColor3f(1, 0, 0);
+
+    glTranslatef(-0.1 , 0, 0);
+    glRotatef(flang[0], 0, 0, 1);
+    glTranslatef(0.1, 0, 0);
+    glPushMatrix();
+    glScalef(0.2, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.1, 0, 0);
+    glTranslatef(-0.05, 0, 0);
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glRotatef(fingers[0], 0, 0, 1);
+    glTranslatef(0.05, 0, 0);
+    glScalef(0.1, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+
+    // END OF FINGER 2
+
+    // START OF FINGER 3
+    glPushMatrix();
+
+    glTranslatef(0.475, 0.05, -0.0375);
+    glColor3f(1, 0, 0);
+
+    glTranslatef(-0.1 , 0, 0);
+    glRotatef(flang[0], 0, 0, 1);
+    glTranslatef(0.1, 0, 0);
+    glPushMatrix();
+    glScalef(0.2, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0.1, 0, 0);
+    glTranslatef(-0.05, 0, 0);
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glRotatef(fingers[0], 0, 0, 1);
+    glTranslatef(0.05, 0, 0);
+    glScalef(0.1, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+
+    // END OF FINGER 3
+
+
+    // START OF FINGER 4
+    glPushMatrix();
+
+    glTranslatef(0.475, 0.05, -0.1125);
+    glColor3f(1, 0, 0);
+
+    glTranslatef(-0.1 , 0, 0);
+    glRotatef(flang[0], 0, 0, 1);
+    glTranslatef(0.1, 0, 0);
+    glPushMatrix();
+    glScalef(0.2, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(0.1, 0, 0);
+    glTranslatef(-0.05, 0, 0);
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glRotatef(fingers[0], 0, 0, 1);
+    glTranslatef(0.05, 0, 0);
+    glScalef(0.1, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+
+    // END OF FINGER 4
+
+
+    // START OF FINGER 5
+    glPushMatrix();
+
+    glTranslatef(0.475, -0.1, 0);
+    glColor3f(1, 0, 0);
+
+    glTranslatef(-0.1 , 0, 0);
+    glRotatef(- flang[0], 0, 0, 1);
+    glTranslatef(0.1, 0, 0);
+    glPushMatrix();
+    glScalef(0.2, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(0.1, 0, 0);
+    glTranslatef(-0.05, 0, 0);
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glRotatef(-fingers[0], 0, 0, 1);
+    glTranslatef(0.05, 0, 0);
+    glScalef(0.1, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+
+    // END OF FINGER 5
+
+
+    glPopMatrix();
+
+
+    // END OF RIGHT ARM
+
+
+    // START OF LEFT ARM
+
+    glPushMatrix();
+
+    //glTranslatef(-1.25, 1.85, 0.3);
+    glTranslatef(-0.9, 1.5, 0.0);
+    // glRotatef((GLfloat)armZ[1], 1.0, 0.0, 0.0);
+    glRotatef(90, 0.0, 0.0, 1.0);
+    glTranslatef(0.375, 0, 0);
+    glRotatef(arm[1], 0.0, 0.0, 0.0);
+    glTranslatef(-0.375, 0, 0);
+
+    // Draw the limb
+    // The shoulder is centered in origin and has 1, 1, 1 dimensions
+    glPushMatrix();
+    glColor3f(0.0, 0.0, 1.0);
+    glScalef (0.75, 0.3, 0.3);
+    glutSolidCube (1.0);
+    glPopMatrix();
+
+    glTranslatef(-0.75, 0, 0);
+
+    glTranslatef(0.375, 0, 0.0);
+    glRotatef((GLfloat)elbow[1], 0.0, 0.0, 0.0);
+    glTranslatef(-0.375, 0, 0.0);
+    glPushMatrix();
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glScalef (0.75, 0.3, 0.3);
+    glutSolidCube (1.0);
+    glPopMatrix();
+
+// START OF FINGER 1
+    glPushMatrix();
+
+    glTranslatef(-0.475, 0.05, 0.1125);
+    glColor3f(1, 0, 0);
+
+    glTranslatef(0.1 , 0, 0);
+    glRotatef(flang[1], 0, 0, 1);
+    glTranslatef(-0.1, 0, 0);
+    glPushMatrix();
+    glScalef(0.2, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-0.1, 0, 0);
+    glTranslatef(0.05, 0, 0);
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glRotatef(fingers[1], 0, 0, 1);
+    glTranslatef(-0.05, 0, 0);
+    glScalef(0.1, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+
+    // END OF FINGER 1
+
+
+    // START OF FINGER 2
+    glPushMatrix();
+
+    glTranslatef(-0.475, 0.05, 0.0375);
+    glColor3f(1, 0, 0);
+
+    glTranslatef(0.1 , 0, 0);
+    glRotatef(flang[1], 0, 0, 1);
+    glTranslatef(-0.1, 0, 0);
+    glPushMatrix();
+    glScalef(0.2, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glTranslatef(-0.1, 0, 0);
+    glTranslatef(0.05, 0, 0);
+    glRotatef(fingers[1], 0, 0, 1);
+    glTranslatef(-0.05, 0, 0);
+    glScalef(0.1, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+
+    // END OF FINGER 2
+
+    // START OF FINGER 3
+    glPushMatrix();
+
+    glTranslatef(-0.475, 0.05, -0.0375);
+    glColor3f(1, 0, 0);
+
+    glTranslatef(0.1 , 0, 0);
+    glRotatef(flang[1], 0, 0, 1);
+    glTranslatef(-0.1, 0, 0);
+    glPushMatrix();
+    glScalef(0.2, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-0.1, 0, 0);
+    glTranslatef(0.05, 0, 0);
+    glRotatef(fingers[1], 0, 0, 1);
+    glTranslatef(-0.05, 0, 0);
+    glScalef(0.1, 0.1, 0.05);
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+
+    // END OF FINGER 3
+
+
+    // START OF FINGER 4
+    glPushMatrix();
+
+    glTranslatef(-0.475, 0.05, -0.1125);
+    glColor3f(1, 0, 0);
+
+    glTranslatef(0.1 , 0, 0);
+    glRotatef(flang[1], 0, 0, 1);
+    glTranslatef(-0.1, 0, 0);
+    glPushMatrix();
+    glScalef(0.2, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-0.1, 0, 0);
+    glTranslatef(0.05, 0, 0);
+    glRotatef(fingers[1], 0, 0, 1);
+    glTranslatef(-0.05, 0, 0);
+    glScalef(0.1, 0.1, 0.05);
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+
+    // END OF FINGER 4
+
+    // START OF FINGER 5
+    glPushMatrix();
+
+    glTranslatef(-0.475, -0.1, 0);
+    glColor3f(1, 0, 0);
+
+    glTranslatef(0.1 , 0, 0);
+    glRotatef(- flang[1], 0, 0, 1);
+    glTranslatef(-0.1, 0, 0);
+    glPushMatrix();
+    glScalef(0.2, 0.1, 0.05);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-0.1, 0, 0);
+    glTranslatef(0.05, 0, 0);
+    glRotatef(-fingers[1], 0, 0, 1);
+    glTranslatef(-0.05, 0, 0);
+    glScalef(0.1, 0.1, 0.05);
+    glColor4f(0.71, 0.4, 0.12, 0.5);
+    glutSolidCube(1.0);
+    glPopMatrix();
+
+    glPopMatrix();
+
+    // END OF FINGER 5
+
+    glPopMatrix();
+
+    // END OF LEFT ARM
+
+    glPopMatrix();
+   // glutSwapBuffers();
+
 }
 
 void display(void)
@@ -598,19 +1079,115 @@ void display(void)
  	
  	//trees
  	//tress(0.0,2.0,20.0);
+ 	//trees
+ 	//tress(0.0,2.0,20.0);
  	
- 	tress(-40.0,2.0,15.0);	
- 	tress(-50.0,2.0,15.0);	
- 	tress(-70.0,2.0,15.0);	
- 	tress(-30.0,2.0,35.0);
- 	tress(-50.0,2.0,35.0);
- 	tress(-70.0,2.0,35.0);
- 	tress(30.0,2.0,15.0);	
- 	tress(50.0,2.0,15.0);	
- 	tress(70.0,2.0,15.0);	
+ 	// tress(-40.0,2.0,15.0);	
+ 	// tress(-50.0,2.0,15.0);	
+ 	// tress(-70.0,2.0,15.0);	
+ 	// tress(-30.0,2.0,35.0);
+ 	// tress(-50.0,2.0,35.0);
+ 	// tress(-70.0,2.0,35.0);
+ 	tress(20.0,2.0,40.0);
+ 	tress(30.0,2.0,20.0);
+ 	tress(30.0,2.0,10.0);
+ 	// tress(30.0,2.0,5.0);
+ 	tress(30.0,2.0,0.0);
+ 	tress(30.0,2.0,-10.0);
+ 	tress(30.0,2.0,-20.0);
+ 	tress(40.0,2.0,10.0);
+ 	// tress(30.0,2.0,-40.0);
+ 	// tress(30.0,2.0,-50.0);
+ 	// tress(30.0,2.0,-60.0);
+ 	// tress(30.0,2.0,-70.0);
+ 	// tress(30.0,2.0,-80.0);
+ 	// tress(30.0,2.0,-90.0);
+ 	// tress(30.0,2.0,-100.0);
+ 	// tress(50.0,2.0,-50.0);	
+ 	// tress(50.0,2.0,-40.0);	
+ 	// tress(50.0,2.0,-30.0);	
+ 	// tress(50.0,2.0,-20.0);	
+ 	// tress(50.0,2.0,-10.0);	
+ 	// tress(50.0,2.0,0.0);
+ 	// tress(50.0,2.0,10.0);
+ 	// tress(50.0,2.0,20.0);
+ 	// tress(50.0,2.0,-60.0);	
+ 	// tress(50.0,2.0,-70.0);	
+ 	// tress(50.0,2.0,-80.0);	
+ 	// tress(50.0,2.0,-90.0);	
+ 	// tress(50.0,2.0,-100.0);				
+ 	// tress(10.0,2.0,-50.0);	
+ 	// tress(10.0,2.0,-40.0);	
+ 	// tress(10.0,2.0,-30.0);	
+ 	tress(10.0,2.0,-20.0);	
+ 	// tress(10.0,2.0,-60.0);	
+ 	// tress(10.0,2.0,-70.0);	
+ 	// tress(10.0,2.0,-80.0);	
+ 	// tress(10.0,2.0,-90.0);	
+ 	// tress(10.0,2.0,-100.0);		
+ 	// tress(-10.0,2.0,-50.0);	
+ 	// tress(-10.0,2.0,-40.0);	
+ 	// tress(-10.0,2.0,-30.0);	
+ 	tress(-10.0,2.0,-20.0);	
+ 	// tress(-10.0,2.0,-60.0);
+ 	// tress(-10.0,2.0,-70.0);
+ 	// tress(-10.0,2.0,-80.0);
+ 	// tress(-10.0,2.0,-90.0);
+ 	// tress(-10.0,2.0,-100.0);
+ 	// tress(-30.0,2.0,-50.0);	
+ 	// tress(-30.0,2.0,-40.0);	
+ 	// tress(-30.0,2.0,-30.0);	
+ 	tress(-30.0,2.0,-20.0);	
+ 	// tress(-30.0,2.0,-60.0);
+ 	// tress(-30.0,2.0,-70.0);	
+ 	// tress(-30.0,2.0,-80.0);	
+ 	// tress(-30.0,2.0,-90.0);		
+ 	tress(-45.0,2.0,40.0);
+ 	tress(-45.0,2.0,20.0);
+ 	tress(-45.0,2.0,10.0);
+ 	// tress(-45.0,2.0,5.0);
+ 	tress(-45.0,2.0,0.0);
+ 	tress(-45.0,2.0,-10.0);
+ 	tress(-45.0,2.0,-20.0);
+ 	tress(-55.0,2.0,5.0);
+ 	// tress(-45.0,2.0,-40.0);
+ 	// tress(-45.0,2.0,-50.0);
+ 	// tress(-45.0,2.0,-60.0);
+ 	// tress(-45.0,2.0,-70.0);
+ 	// tress(-45.0,2.0,-80.0);	
+ 	// tress(-60.0,2.0,30.0);
+ 	// tress(-60.0,2.0,20.0);
+ 	// tress(-60.0,2.0,10.0);
+ 	// tress(-60.0,2.0,5.0);
+ 	// tress(-60.0,2.0,0.0);
+ 	// tress(-60.0,2.0,-10.0);
+ 	// tress(-60.0,2.0,-20.0);
+ 	// tress(-60.0,2.0,-30.0);
+ 	// tress(-60.0,2.0,-40.0);	
+ 	// tress(-60.0,2.0,-50.0);	
+ 	// tress(-60.0,2.0,-60.0);	
+ 	// tress(-60.0,2.0,-70.0);	
+ 	// tress(-60.0,2.0,-80.0);
+ 	// tress(-60.0,2.0,-90.0);	
+ 	// tress(-60.0,2.0,-100.0);	
+ 	// tress(-60.0,2.0,-110.0);		
+ 	//tress(50.0,2.0,15.0);	
+ 	//tress(70.0,2.0,15.0);	
  	//tress(30.0,2.0,35.0);
- 	tress(50.0,2.0,35.0);
- 	tress(70.0,2.0,35.0);
+ 	// tress(50.0,2.0,35.0);
+ 	// tress(70.0,2.0,35.0);
+ 	// tress(70.0,2.0,10.0);
+ 	// tress(70.0,2.0,20.0);
+ 	// tress(70.0,2.0,0.0);
+ 	
+ 	
+  glPushMatrix();
+ 	body(0.0,2.5,10);
+  glPopMatrix();
+
+  glPushMatrix();
+ 	body(0.0,2.5,-4.0);
+  glPopMatrix();
  	
  	//GLfloat tx = 0.0,ty = 0.0,tz = 2.2;
  	//car(tx,ty,tz);
@@ -676,7 +1253,7 @@ void keys(unsigned char key, int x, int y)
    if(key == 'Y') viewer[1]+= 1.0;
    if(key == 'z') viewer[2]-= 1.0;
    if(key == 'Z') viewer[2]+= 1.0;
-   printf("\n%f %f %f\n",viewer[0],viewer[1],viewer[2]);
+   //printf("\n%f %f %f\n",viewer[0],viewer[1],viewer[2]);
    display();
 }
 
