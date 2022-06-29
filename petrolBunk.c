@@ -546,6 +546,9 @@ void car1()
 			}
  		}		
  	}
+ 	
+ 	if(tx<-20)
+ 		tx = 20.0;
 }
 
 
@@ -562,6 +565,8 @@ void car2()
  	{
  		tx-=0.1;
  	}
+ 	 if(tx<-20)
+ 		tx = 20.0;
 }
 
 void body(GLfloat tx,GLfloat ty,GLfloat tz)
